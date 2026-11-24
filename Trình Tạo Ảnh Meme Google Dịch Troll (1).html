@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo Ảnh Meme Google Dịch Troll</title>
+    <!-- Tải Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tải Font Inter & Roboto từ Google Fonts để chuẩn giao diện Google Dịch -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Thiết lập bảng màu chuẩn Google Dịch */
+        :root {
+            --bg-page: #f1f3f4;
+            --bg-card: #ffffff;
+            --google-blue: #1a73e8;
+            --google-blue-hover: #1557b0;
+            --google-blue-soft: #e8f0fe;
+            --google-text: #202124;
+            --google-icon: #5f6368;
+            --google-border: #e0e0e0;
+            --pastel-yellow-bg: #fef7e0;
+            --pastel-yellow-border: #fde293;
+            --pastel-yellow-text: #b06000;
+            --dark-slate: #1e293b;
+            --dark-slate-hover: #0f172a;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--google-text);
+        }
+
+        /* Font chuẩn của Google Dịch cho khung xem trước */
+        .gtranslate-font {
+            font-family: 'Roboto', 'Inter', sans-serif;
+        }
+
+        /* Nút Random màu vàng pastel */
+        .btn-random-pastel {
+            background-color: var(--pastel-yellow-bg);
+            border: 1px solid var(--pastel-yellow-border);
+            color: var(--pastel-yellow-text);
+        }
+        .btn-random-pastel:hover {
+            background-color: #fcefc7;
+        }
+
+        /* Nút tải ảnh màu xanh Google */
+        .btn-google-blue {
+            background-color: var(--google-blue);
+            color: #ffffff;
+        }
+        .btn-google-blue:hover {
+            background-color: var(--google-blue-hover);
+        }
+
+        /* Nút sao chép ảnh màu xanh đen đậm */
+        .btn-dark-slate {
+            background-color: var(--dark-slate);
+            color: #ffffff;
+        }
+        .btn-dark-slate:hover {
+            background-color: var(--dark-slate-hover);
+        }
+
+        /* Thanh cuộn tinh tế */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f3f4;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dadce0;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #bdc1c6;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Header trắng sạch sẽ chuẩn Google -->
+    <header class="bg-white border-b border-[#e0e0e0] sticky top-0 z-30">
+        <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-[#1a73e8] flex items-center justify-center text-white font-bold text-xl shadow-sm shrink-0">
+                    G
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-bold text-[#202124] leading-tight">Meme Dịch Troll</h1>
+                    <p class="text-xs text-[#5f6368] hidden sm:block">Tạo ảnh trêu bạn bè & thả thính chuẩn giao diện Google Dịch</p>
+                </div>
+            </div>
+            <button onclick="randomTroll()" type="button" class="btn-random-pastel flex items-center gap-1.5 font-semibold text-xs sm:text-sm px-3.5 py-2 rounded-xl transition active:scale-95 shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"/><path d="m18 2 4 4-4 4"/><path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"/><path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8"/><path d="m18 14 4 4-4 4"/></svg>
+                <span>Random Câu Troll</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Cột Trái: Khu vực Xem trước (Live Preview), Nút Xuất & Tùy chỉnh -->
+        <div class="lg:col-span-6 flex flex-col gap-5">
+            <!-- Card Xem Trước & Hành Động -->
+            <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-[#e0e0e0]">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-sm font-semibold text-[#202124] flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-[#34a853]"></span>
+                        Xem trước ảnh xuất ra
+                    </span>
+                    <span class="text-xs text-[#5f6368] bg-[#f1f3f4] px-2.5 py-1 rounded-full font-medium">Tỉ lệ chuẩn màn hình</span>
+                </div>
+
+                <!-- KHUNG GIAO DIỆN GOOGLE DỊCH MÔ PHỎNG (LIVE PREVIEW) -->
+                <div class="border border-[#e0e0e0] rounded-xl overflow-hidden shadow-sm bg-white select-none gtranslate-font">
+                    <!-- Thanh ngôn ngữ trên cùng -->
+                    <div class="flex items-center justify-between px-4 sm:px-8 py-3.5 border-b border-[#e0e0e0] bg-white">
+                        <div class="flex items-center gap-1.5 text-[#1a73e8] font-medium text-sm sm:text-base">
+                            <span id="previewSourceLang">Tiếng Anh</span>
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                        </div>
+                        
+                        <!-- Icon 2 mũi tên đảo chiều màu xám #5f6368 -->
+                        <button onclick="swapLanguages()" type="button" title="Đảo chiều ngôn ngữ" class="text-[#5f6368] hover:text-[#1a73e8] p-1.5 rounded-full hover:bg-[#f1f3f4] active:scale-90 transition">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"/>
+                            </svg>
+                        </button>
+
+                        <div class="flex items-center gap-1.5 text-[#1a73e8] font-medium text-sm sm:text-base">
+                            <span id="previewTargetLang">Tiếng Việt</span>
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Ô văn bản nguồn (Trên) -->
+                    <div class="p-4 sm:p-5 bg-white relative min-h-[145px] sm:min-h-[165px] flex flex-col justify-between border-b border-[#e0e0e0]">
+                        <div class="flex justify-between items-start gap-3">
+                            <div onclick="copyTopText()" title="Bấm trực tiếp để sao chép từ này" class="w-full cursor-pointer rounded-lg -m-1.5 p-1.5 hover:bg-[#e8f0fe]/60 active:bg-[#e8f0fe] transition">
+                                <p id="previewTopText" class="text-2xl sm:text-[28px] text-[#202124] leading-snug break-words w-full font-normal">haylaminhyeunhaudi</p>
+                            </div>
+                            <!-- Nút X xóa màu xám #5f6368 -->
+                            <button onclick="clearTopText()" type="button" title="Xóa nhanh văn bản trên" class="text-[#5f6368] hover:text-[#202124] p-1 shrink-0 transition">
+                                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Hàng dưới cùng của ô trên: Nút Copy từ nhỏ gọn bên trái (không vẽ lên Canvas xuất ảnh) + Icon Loa & Google Lens bên phải -->
+                        <div class="flex items-center justify-between gap-2 mt-6">
+                            <button onclick="copyTopText()" type="button" class="inline-flex items-center gap-1.5 text-xs font-medium text-[#1a73e8] bg-[#e8f0fe] hover:bg-[#d2e3fc] active:scale-95 px-2.5 py-1.5 rounded-lg transition">
+                                <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                                <span>Copy từ</span>
+                            </button>
+
+                            <div class="flex items-center gap-5 text-[#5f6368]">
+                                <!-- Icon Loa -->
+                                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                                </svg>
+                                <!-- Icon Google Lens / Camera -->
+                                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                    <path d="M12 15.2c1.77 0 3.2-1.43 3.2-3.2s-1.43-3.2-3.2-3.2-3.2 1.43-3.2 3.2 1.43 3.2 3.2 3.2zm0-4.8c.88 0 1.6.72 1.6 1.6s-.72 1.6-1.6 1.6-1.6-.72-1.6-1.6.72-1.6 1.6-1.6z"/>
+                                    <path d="M19 4h-3.17L14.41 2.59C14.04 2.21 13.53 2 13 2h-2c-.53 0-1.04.21-1.41.59L8.17 4H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7v-2H5V6h4.05l1.83-2h2.24l1.83 2H19v6h2V6c0-1.1-.9-2-2-2z"/>
+                                    <circle cx="18" cy="18" r="2.2"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ô kết quả dịch giả đánh lừa (Dưới) -->
+                    <div class="p-4 sm:p-5 bg-white relative min-h-[140px] sm:min-h-[155px] flex flex-col justify-between">
+                        <div>
+                            <p id="previewBottomText" class="text-2xl sm:text-[28px] text-[#202124] leading-snug break-words w-full font-normal">ăn cơm chưa</p>
+                        </div>
+
+                        <!-- Hàng dưới cùng của ô dưới: Logo Google G 4 màu + Icon Loa + Icon Copy nghĩa giả -->
+                        <div class="flex items-center gap-6 mt-6">
+                            <!-- Logo Google G 4 màu chuẩn -->
+                            <svg class="w-6 h-6 shrink-0" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                                <path fill="#34A853" d="M12 24c3.3 0 6.08-1.09 8.1-2.96l-3.88-3.05c-1.1.74-2.51 1.18-4.22 1.18-3.25 0-6-2.19-6.98-5.14H1.01v3.14C3.05 21.2 7.24 24 12 24z"/>
+                                <path fill="#FBBC05" d="M5.02 15.31c-.25-.74-.39-1.54-.39-2.36 0-.82.14-1.62.39-2.36V7.45H1.01C.37 8.73 0 10.16 0 11.67s.37 2.94 1.01 4.22l4.01-3.14z"/>
+                                <path fill="#EA4335" d="M12 4.75c1.79 0 3.41.62 4.68 1.82l3.51-3.51C18.07 1.19 15.3 0 12 0 7.24 0 3.05 2.8 1.01 6.83l4.01 3.14c.98-2.95 3.73-5.22 6.98-5.22z"/>
+                            </svg>
+
+                            <!-- Icon Loa -->
+                            <div class="text-[#5f6368]">
+                                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                                </svg>
+                            </div>
+
+                            <!-- Icon Copy nghĩa giả -->
+                            <button onclick="copyBottomText()" type="button" title="Sao chép nghĩa giả đánh lừa" class="text-[#5f6368] hover:text-[#1a73e8] p-1 rounded-lg hover:bg-[#f1f3f4] active:scale-90 transition">
+                                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                    <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Các nút hành động -->
+                <div class="flex flex-col gap-2.5 mt-5">
+                    <button onclick="downloadImage()" type="button" class="btn-google-blue w-full flex items-center justify-center gap-2 font-semibold py-3.5 px-4 rounded-xl shadow-sm transition active:scale-[0.99] text-sm sm:text-base">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                        <span>Tải Ảnh Xuống (PNG)</span>
+                    </button>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <button onclick="copyImageToClipboard()" type="button" class="btn-dark-slate flex items-center justify-center gap-2 font-semibold py-3 px-4 rounded-xl shadow-sm transition active:scale-[0.98] text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                            <span>Sao Chép Ảnh Gửi Nhanh</span>
+                        </button>
+
+                        <button onclick="copyTopText()" type="button" class="flex items-center justify-center gap-2 bg-[#e8f0fe] hover:bg-[#d2e3fc] text-[#1a73e8] border border-[#d2e3fc] font-semibold py-3 px-4 rounded-xl transition active:scale-[0.98] text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/></svg>
+                            <span>Copy Từ Nhanh</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bảng điều khiển tùy chỉnh nội dung -->
+            <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-[#e0e0e0] flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-base font-bold text-[#202124] flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#1a73e8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                        Tùy chỉnh nội dung
+                    </h2>
+                    <button onclick="swapLanguages()" type="button" class="text-xs font-medium text-[#1a73e8] hover:underline flex items-center gap-1">
+                        <span>⇄ Đảo ngôn ngữ</span>
+                    </button>
+                </div>
+
+                <!-- Chọn ngôn ngữ -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-[#5f6368] mb-1">Ngôn ngữ trên (Giả vờ)</label>
+                        <select id="sourceLangSelect" onchange="handleLangChange('source')" class="w-full bg-[#f8f9fa] border border-[#dadce0] text-[#202124] text-sm rounded-xl focus:ring-2 focus:ring-[#1a73e8] focus:border-[#1a73e8] p-2.5 outline-none">
+                            <option value="Tiếng Anh" selected>Tiếng Anh</option>
+                            <option value="Tiếng Hàn">Tiếng Hàn</option>
+                            <option value="Tiếng Nhật">Tiếng Nhật</option>
+                            <option value="Tiếng Trung">Tiếng Trung</option>
+                            <option value="Tiếng Pháp">Tiếng Pháp</option>
+                            <option value="Tiếng Tây Ban Nha">Tiếng Tây Ban Nha</option>
+                            <option value="Tiếng Thái">Tiếng Thái</option>
+                            <option value="Tiếng Việt">Tiếng Việt</option>
+                            <option value="custom">Tự nhập tên ngôn ngữ...</option>
+                        </select>
+                        <input type="text" id="sourceLangCustom" oninput="updatePreview()" placeholder="Nhập ngôn ngữ..." class="hidden mt-2 w-full bg-white border border-[#dadce0] text-[#202124] text-sm rounded-xl p-2 focus:border-[#1a73e8] outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-[#5f6368] mb-1">Ngôn ngữ dưới (Dịch ra)</label>
+                        <select id="targetLangSelect" onchange="handleLangChange('target')" class="w-full bg-[#f8f9fa] border border-[#dadce0] text-[#202124] text-sm rounded-xl focus:ring-2 focus:ring-[#1a73e8] focus:border-[#1a73e8] p-2.5 outline-none">
+                            <option value="Tiếng Việt" selected>Tiếng Việt</option>
+                            <option value="Tiếng Anh">Tiếng Anh</option>
+                            <option value="Tiếng Hàn">Tiếng Hàn</option>
+                            <option value="Tiếng Nhật">Tiếng Nhật</option>
+                            <option value="Tiếng Trung">Tiếng Trung</option>
+                            <option value="custom">Tự nhập tên ngôn ngữ...</option>
+                        </select>
+                        <input type="text" id="targetLangCustom" oninput="updatePreview()" placeholder="Nhập ngôn ngữ..." class="hidden mt-2 w-full bg-white border border-[#dadce0] text-[#202124] text-sm rounded-xl p-2 focus:border-[#1a73e8] outline-none">
+                    </div>
+                </div>
+
+                <!-- Công cụ chuyển đổi nhanh từ tiếng Việt có dấu sang chữ viết liền không dấu -->
+                <div class="bg-[#e8f0fe]/60 border border-[#d2e3fc] rounded-xl p-3">
+                    <label for="quickSlugInput" class="block text-xs font-semibold text-[#1a73e8] mb-1.5">⚡ Chuyển nhanh tiếng Việt có dấu → Chữ viết liền không dấu</label>
+                    <input type="text" id="quickSlugInput" oninput="autoGenerateSlugFromVietnamese()" placeholder="Gõ tiếng Việt có dấu (VD: hay là mình yêu nhau đi)..." class="w-full bg-white border border-[#d2e3fc] text-[#202124] text-sm rounded-xl px-3 py-2 focus:outline-none focus:border-[#1a73e8]">
+                </div>
+
+                <!-- Nhập câu trên: Từ viết liền không dấu -->
+                <div>
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                        <label for="inputTopText" class="text-xs font-semibold text-[#5f6368]">Từ viết liền không dấu (Bên trên)</label>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="copyTopText()" type="button" class="text-xs bg-[#e8f0fe] hover:bg-[#d2e3fc] text-[#1a73e8] font-semibold px-2.5 py-1 rounded-lg transition">
+                                📋 Copy từ
+                            </button>
+                            <button onclick="convertToTrollSlug()" type="button" class="text-xs bg-[#f1f3f4] hover:bg-[#e8eaed] text-[#202124] font-semibold px-2.5 py-1 rounded-lg border border-[#dadce0] transition">
+                                ✨ Biến thành chữ liền
+                            </button>
+                        </div>
+                    </div>
+                    <textarea id="inputTopText" rows="2" oninput="updatePreview()" placeholder="Ví dụ: haylaminhyeunhaudi" class="w-full bg-[#f8f9fa] border border-[#dadce0] text-[#202124] text-sm rounded-xl focus:border-[#1a73e8] focus:bg-white p-3 outline-none transition">haylaminhyeunhaudi</textarea>
+                </div>
+
+                <!-- Nhập câu dưới: Nghĩa giả đánh lừa -->
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                        <label for="inputBottomText" class="text-xs font-semibold text-[#5f6368]">Nghĩa giả đánh lừa (Bên dưới)</label>
+                        <button onclick="clearBottomText()" type="button" class="text-xs text-[#5f6368] hover:text-[#d93025] bg-[#f1f3f4] hover:bg-[#fce8e6] font-medium px-2.5 py-1 rounded-lg transition">
+                            ✕ Xóa nhanh
+                        </button>
+                    </div>
+                    <textarea id="inputBottomText" rows="2" oninput="updatePreview()" placeholder="Ví dụ: ăn cơm chưa" class="w-full bg-[#f8f9fa] border border-[#dadce0] text-[#202124] text-sm rounded-xl focus:border-[#1a73e8] focus:bg-white p-3 outline-none transition">ăn cơm chưa</textarea>
+                </div>
+
+                <!-- Đặt tên file ảnh khi tải về -->
+                <div class="pt-3 border-t border-[#e0e0e0]">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                        <label for="customFileNameInput" class="text-xs font-semibold text-[#5f6368]">Tên file ảnh khi tải về (.png)</label>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="suggestFileNameFromTopText()" type="button" class="text-xs bg-[#e8f0fe] hover:bg-[#d2e3fc] text-[#1a73e8] font-semibold px-2.5 py-1 rounded-lg transition">
+                                🏷️ Lấy theo từ trên
+                            </button>
+                            <button onclick="clearCustomFileName()" type="button" class="text-xs text-[#5f6368] hover:text-[#d93025] bg-[#f1f3f4] hover:bg-[#fce8e6] font-medium px-2.5 py-1 rounded-lg transition">
+                                ✕ Xóa nhanh
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex items-center bg-[#f8f9fa] border border-[#dadce0] rounded-xl focus-within:border-[#1a73e8] focus-within:bg-white overflow-hidden transition">
+                        <input type="text" id="customFileNameInput" placeholder="Để trống sẽ tự đặt theo từ nguồn..." class="w-full bg-transparent text-[#202124] text-sm px-3 py-2.5 outline-none">
+                        <span class="text-xs font-semibold text-[#5f6368] bg-[#f1f3f4] border-l border-[#dadce0] px-3 py-2.5 select-none">.png</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cột Phải: Kho Từ Điển Troll Có Sẵn -->
+        <div class="lg:col-span-6 flex flex-col">
+            <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-[#e0e0e0] flex-grow flex flex-col">
+                <div class="flex items-center justify-between mb-3">
+                    <div>
+                        <h2 class="text-base font-bold text-[#202124] flex items-center gap-2">
+                            <span class="text-xl">🔥</span> Kho Từ Điển Troll TikTok
+                        </h2>
+                        <p class="text-xs text-[#5f6368] mt-0.5">Bấm vào thẻ để áp dụng ngay hoặc bấm "Copy từ" để sao chép</p>
+                    </div>
+                    <span id="phraseCount" class="text-xs font-semibold bg-[#e8f0fe] text-[#1a73e8] px-2.5 py-1 rounded-full">0 câu</span>
+                </div>
+
+                <!-- Thanh tìm kiếm nhanh trong kho -->
+                <div class="relative mb-3">
+                    <input type="text" id="searchTrollInput" oninput="filterPhrases()" placeholder="Tìm câu thả thính, trêu bạn, hài hước, đòi nợ..." class="w-full bg-[#f8f9fa] border border-[#dadce0] text-[#202124] text-sm rounded-xl pl-9 pr-3 py-2.5 focus:outline-none focus:border-[#1a73e8] focus:bg-white transition">
+                    <svg class="w-4 h-4 text-[#5f6368] absolute left-3 top-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </div>
+
+                <!-- Bộ lọc chủ đề (Tabs) -->
+                <div id="categoryTabs" class="flex items-center gap-1.5 overflow-x-auto pb-2 mb-3">
+                    <button onclick="selectCategory('all')" data-cat="all" class="cat-btn active shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#1a73e8] text-white transition">Tất cả</button>
+                    <button onclick="selectCategory('thathinh')" data-cat="thathinh" class="cat-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#f1f3f4] text-[#5f6368] hover:bg-[#e8eaed] transition">💘 Thả thính</button>
+                    <button onclick="selectCategory('treuban')" data-cat="treuban" class="cat-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#f1f3f4] text-[#5f6368] hover:bg-[#e8eaed] transition">🤡 Trêu bạn</button>
+                    <button onclick="selectCategory('haihuoc')" data-cat="haihuoc" class="cat-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#f1f3f4] text-[#5f6368] hover:bg-[#e8eaed] transition">😂 Hài hước</button>
+                    <button onclick="selectCategory('doino')" data-cat="doino" class="cat-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#f1f3f4] text-[#5f6368] hover:bg-[#e8eaed] transition">💸 Đòi nợ</button>
+                </div>
+
+                <!-- Danh sách thẻ câu troll -->
+                <div id="phrasesContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 overflow-y-auto max-h-[560px] pr-1">
+                    <!-- Các thẻ sẽ được render bằng JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Thông báo Toast (Thay thế cho alert) -->
+    <div id="toastNotification" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 transform transition-all duration-300 translate-y-20 opacity-0 pointer-events-none">
+        <div class="bg-[#202124] text-white px-4 py-3 rounded-xl shadow-lg flex items-center gap-2.5 text-sm font-medium">
+            <span id="toastIcon">✅</span>
+            <span id="toastMessage">Thông báo</span>
+        </div>
+    </div>
+
+    <!-- Canvas ẩn dùng để vẽ và xuất ảnh sạch 100% -->
+    <canvas id="exportCanvas" class="hidden"></canvas>
+
+    <script>
+        // Kho dữ liệu các câu troll phân loại theo 4 chủ đề: Thả thính, Trêu bạn, Hài hước, Đòi nợ
+        const trollDictionary = [
+            // Thả thính
+            { top: "haylaminhyeunhaudi", bottom: "ăn cơm chưa", category: "thathinh", tag: "💘 Thả thính" },
+            { top: "anhyeuemnhieulam", bottom: "hôm nay trời đẹp quá", category: "thathinh", tag: "💘 Thả thính" },
+            { top: "lamnguoiyeuanhnhe", bottom: "chúc ngủ ngon nhé", category: "thathinh", tag: "💘 Thả thính" },
+            { top: "emcobietanhnhoemkhong", bottom: "bài tập hôm nay khó quá", category: "thathinh", tag: "💘 Thả thính" },
+            { top: "dichoiwithanhkhong", bottom: "bạn đang làm gì đấy", category: "thathinh", tag: "💘 Thả thính" },
+            { top: "anhmuonhonemmotcai", bottom: "mai đi học không", category: "thathinh", tag: "💘 Thả thính" },
+            { top: "traitimanhchicoemthoi", bottom: "cho xin link tài liệu với", category: "thathinh", tag: "💘 Thả thính" },
+            { top: "emxinhnhuthienthan", bottom: "trời sắp mưa rồi", category: "thathinh", tag: "💘 Thả thính" },
+
+            // Trêu bạn
+            { top: "taolathangngoc", bottom: "tôi rất thông minh", category: "treuban", tag: "🤡 Trêu bạn" },
+            { top: "emxinhnhuconcho", bottom: "em xinh như thiên thần", category: "treuban", tag: "🤡 Trêu bạn" },
+            { top: "nguoitaolacucsuc", bottom: "bạn thật dễ thương", category: "treuban", tag: "🤡 Trêu bạn" },
+            { top: "maybinguahathangngoc", bottom: "chúc bạn một ngày tốt lành", category: "treuban", tag: "🤡 Trêu bạn" },
+            { top: "nhinmatmaynhucaiquan", bottom: "hôm nay bạn trông thật bảnh", category: "treuban", tag: "🤡 Trêu bạn" },
+            { top: "baotaoantrasuadi", bottom: "cảm ơn bạn rất nhiều", category: "treuban", tag: "🤡 Trêu bạn" },
+
+            // Hài hước
+            { top: "biquyetdeptrailaanh", bottom: "xin chào mọi người", category: "haihuoc", tag: "😂 Hài hước" },
+            { top: "dungsocnguoideptrai", bottom: "tạm biệt nhé", category: "haihuoc", tag: "😂 Hài hước" },
+            { top: "ngheomaconhaydoi", bottom: "hãy cố gắng lên nhé", category: "haihuoc", tag: "😂 Hài hước" },
+            { top: "luoihocnhungthichdiemcao", bottom: "chúc thi tốt nhé", category: "haihuoc", tag: "😂 Hài hước" },
+            { top: "eothonnhungbungmo", bottom: "dáng chuẩn người mẫu", category: "haihuoc", tag: "😂 Hài hước" },
+            { top: "taodangthieutienan", bottom: "mình vừa trúng số", category: "haihuoc", tag: "😂 Hài hước" },
+
+            // Đòi nợ
+            { top: "chomaymuon500kdi", bottom: "chúc bạn buổi tối vui vẻ", category: "doino", tag: "💸 Đòi nợ" },
+            { top: "baogiotratienchoanh", bottom: "chúc mừng sinh nhật", category: "doino", tag: "💸 Đòi nợ" },
+            { top: "chuyankhoan500knhanh", bottom: "rất vui được làm quen", category: "doino", tag: "💸 Đòi nợ" },
+            { top: "no500kbaogiotra", bottom: "cuối tuần đi chơi nhé", category: "doino", tag: "💸 Đòi nợ" },
+            { top: "chotaovay200kmaihoantra", bottom: "bạn khỏe không", category: "doino", tag: "💸 Đòi nợ" }
+        ];
+
+        let currentCategory = 'all';
+        let toastTimeout = null;
+
+        // Hiển thị thông báo toast mượt mà
+        function showToast(message, icon = '✅') {
+            try {
+                const toast = document.getElementById('toastNotification');
+                document.getElementById('toastMessage').textContent = message;
+                document.getElementById('toastIcon').textContent = icon;
+
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                toast.classList.add('translate-y-0', 'opacity-100');
+
+                if (toastTimeout) clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toast.classList.remove('translate-y-0', 'opacity-100');
+                    toast.classList.add('translate-y-20', 'opacity-0');
+                }, 2800);
+            } catch (err) {
+                console.error('Lỗi hiển thị thông báo:', err);
+            }
+        }
+
+        // Xử lý thay đổi ngôn ngữ (chọn sẵn hoặc tự nhập)
+        function handleLangChange(type) {
+            try {
+                const selectEl = document.getElementById(type === 'source' ? 'sourceLangSelect' : 'targetLangSelect');
+                const customEl = document.getElementById(type === 'source' ? 'sourceLangCustom' : 'targetLangCustom');
+
+                if (selectEl.value === 'custom') {
+                    customEl.classList.remove('hidden');
+                    customEl.focus();
+                } else {
+                    customEl.classList.add('hidden');
+                }
+                updatePreview();
+            } catch (err) {
+                console.error('Lỗi đổi ngôn ngữ:', err);
+            }
+        }
+
+        // Lấy tên ngôn ngữ hiện tại
+        function getLanguageText(type) {
+            const selectEl = document.getElementById(type === 'source' ? 'sourceLangSelect' : 'targetLangSelect');
+            const customEl = document.getElementById(type === 'source' ? 'sourceLangCustom' : 'targetLangCustom');
+
+            if (selectEl.value === 'custom') {
+                return customEl.value.trim() || (type === 'source' ? 'Tiếng Anh' : 'Tiếng Việt');
+            }
+            return selectEl.value;
+        }
+
+        // Cập nhật bản xem trước (Live Preview)
+        function updatePreview() {
+            try {
+                const topText = document.getElementById('inputTopText').value;
+                const bottomText = document.getElementById('inputBottomText').value;
+
+                document.getElementById('previewSourceLang').textContent = getLanguageText('source');
+                document.getElementById('previewTargetLang').textContent = getLanguageText('target');
+
+                document.getElementById('previewTopText').textContent = topText || ' ';
+                document.getElementById('previewBottomText').textContent = bottomText || ' ';
+            } catch (err) {
+                console.error('Lỗi cập nhật xem trước:', err);
+            }
+        }
+
+        // Xóa nhanh văn bản trên khi bấm nút X trên khung xem trước
+        function clearTopText() {
+            document.getElementById('inputTopText').value = '';
+            document.getElementById('inputTopText').focus();
+            updatePreview();
+        }
+
+        // Xóa nhanh nghĩa giả đánh lừa bên dưới
+        function clearBottomText() {
+            document.getElementById('inputBottomText').value = '';
+            document.getElementById('inputBottomText').focus();
+            updatePreview();
+        }
+
+        // Chuẩn hóa tên file an toàn (bỏ dấu tiếng Việt, bỏ đuôi .png nếu gõ dư, thay ký tự đặc biệt)
+        function sanitizeFileNameBase(rawName) {
+            if (!rawName) return '';
+            let clean = rawName.trim().toLowerCase();
+            clean = clean.replace(/\.png$/i, '');
+            clean = clean.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            clean = clean.replace(/đ/g, 'd');
+            clean = clean.replace(/[^a-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '');
+            return clean.slice(0, 60);
+        }
+
+        // Tạo tên file PNG cuối cùng khi tải xuống
+        function buildDownloadFileName() {
+            const customInputEl = document.getElementById('customFileNameInput');
+            const customBase = customInputEl ? sanitizeFileNameBase(customInputEl.value) : '';
+            if (customBase) {
+                return `${customBase}.png`;
+            }
+
+            const rawTop = document.getElementById('inputTopText').value || 'meme-dich';
+            const slug = sanitizeFileNameBase(rawTop).slice(0, 24) || 'meme_dich';
+            return `google-dich-troll-${slug}.png`;
+        }
+
+        // Gợi ý tên file ảnh theo từ nguồn ở dòng trên
+        function suggestFileNameFromTopText() {
+            const rawTop = document.getElementById('inputTopText').value.trim();
+            const suggested = sanitizeFileNameBase(rawTop) || 'meme-dich-troll';
+            document.getElementById('customFileNameInput').value = suggested;
+            showToast(`Đã điền tên file: ${suggested}.png`, '🏷️');
+        }
+
+        // Xóa nhanh tên file tùy chỉnh
+        function clearCustomFileName() {
+            document.getElementById('customFileNameInput').value = '';
+            document.getElementById('customFileNameInput').focus();
+        }
+
+        // Đảo chiều ngôn ngữ trên và dưới
+        function swapLanguages() {
+            try {
+                const srcSelect = document.getElementById('sourceLangSelect');
+                const tgtSelect = document.getElementById('targetLangSelect');
+                const srcCustom = document.getElementById('sourceLangCustom');
+                const tgtCustom = document.getElementById('targetLangCustom');
+
+                const currentSrcText = getLanguageText('source');
+                const currentTgtText = getLanguageText('target');
+
+                if ([...srcSelect.options].some(opt => opt.value === currentTgtText && opt.value !== 'custom')) {
+                    srcSelect.value = currentTgtText;
+                    srcCustom.classList.add('hidden');
+                } else {
+                    srcSelect.value = 'custom';
+                    srcCustom.value = currentTgtText;
+                    srcCustom.classList.remove('hidden');
+                }
+
+                if ([...tgtSelect.options].some(opt => opt.value === currentSrcText && opt.value !== 'custom')) {
+                    tgtSelect.value = currentSrcText;
+                    tgtCustom.classList.add('hidden');
+                } else {
+                    tgtSelect.value = 'custom';
+                    tgtCustom.value = currentSrcText;
+                    tgtCustom.classList.remove('hidden');
+                }
+
+                updatePreview();
+                showToast(`Đã đảo sang ${currentTgtText} → ${currentSrcText}`, '🔄');
+            } catch (err) {
+                console.error('Lỗi đảo ngôn ngữ:', err);
+            }
+        }
+
+        // Hàm sao chép chuỗi văn bản vào clipboard (tương thích mọi trình duyệt/iFrame)
+        function copyTextToClipboard(text, successPrefix = 'Đã sao chép') {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            tempInput.style.position = 'fixed';
+            tempInput.style.opacity = '0';
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999);
+
+            try {
+                document.execCommand('copy');
+                const displayWord = text.length > 26 ? text.slice(0, 26) + '...' : text;
+                showToast(`${successPrefix}: ${displayWord}`, '📋');
+            } catch (err) {
+                console.error('Lỗi sao chép văn bản:', err);
+                showToast('Không thể sao chép tự động, vui lòng bôi đen để copy!', '❌');
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+
+        // Sao chép nhanh văn bản nguồn (từ viết liền không dấu)
+        function copyTopText() {
+            const text = document.getElementById('inputTopText').value.trim();
+            if (!text) {
+                showToast('Chưa có từ nào ở dòng trên để sao chép!', '⚠️');
+                return;
+            }
+            copyTextToClipboard(text, 'Đã sao chép từ');
+        }
+
+        // Sao chép nhanh nghĩa giả đánh lừa (bên dưới)
+        function copyBottomText() {
+            const text = document.getElementById('inputBottomText').value.trim();
+            if (!text) {
+                showToast('Chưa có nghĩa giả nào ở dòng dưới để sao chép!', '⚠️');
+                return;
+            }
+            copyTextToClipboard(text, 'Đã sao chép nghĩa giả');
+        }
+
+        // Chuẩn hóa chuỗi tiếng Việt có dấu thành chữ viết liền không dấu
+        function toSlugString(rawStr) {
+            let str = rawStr.toLowerCase();
+            str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            str = str.replace(/đ/g, 'd');
+            str = str.replace(/[^a-z0-9]/g, '');
+            return str;
+        }
+
+        // Tự động sinh chữ liền không dấu từ ô chuyển đổi nhanh
+        function autoGenerateSlugFromVietnamese() {
+            const raw = document.getElementById('quickSlugInput').value;
+            document.getElementById('inputTopText').value = toSlugString(raw);
+            updatePreview();
+        }
+
+        // Biến nội dung hiện tại trong ô trên thành chữ viết liền không dấu
+        function convertToTrollSlug() {
+            const inputEl = document.getElementById('inputTopText');
+            const str = inputEl.value;
+            if (!str.trim()) {
+                showToast('Vui lòng nhập câu tiếng Việt vào ô trên trước!', '⚠️');
+                return;
+            }
+            inputEl.value = toSlugString(str);
+            updatePreview();
+            showToast('Đã biến hình thành chữ viết liền không dấu!', '✨');
+        }
+
+        // Chọn ngẫu nhiên một câu troll từ kho
+        function randomTroll() {
+            const randomIndex = Math.floor(Math.random() * trollDictionary.length);
+            const item = trollDictionary[randomIndex];
+            applyPhrase(item.top, item.bottom);
+            showToast('Đã chọn ngẫu nhiên một câu troll cực dính!', '🎲');
+        }
+
+        // Áp dụng câu troll vào khung nhập
+        function applyPhrase(top, bottom) {
+            document.getElementById('inputTopText').value = top;
+            document.getElementById('inputBottomText').value = bottom;
+            updatePreview();
+        }
+
+        // Lọc theo chủ đề
+        function selectCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.classList.remove('bg-[#f1f3f4]', 'text-[#5f6368]');
+                    btn.classList.add('bg-[#1a73e8]', 'text-white');
+                } else {
+                    btn.classList.remove('bg-[#1a73e8]', 'text-white');
+                    btn.classList.add('bg-[#f1f3f4]', 'text-[#5f6368]');
+                }
+            });
+            filterPhrases();
+        }
+
+        // Tìm kiếm và hiển thị danh sách thẻ câu troll
+        function filterPhrases() {
+            try {
+                const keyword = document.getElementById('searchTrollInput').value.toLowerCase().trim();
+                const container = document.getElementById('phrasesContainer');
+
+                const filtered = trollDictionary.filter(item => {
+                    const matchCat = currentCategory === 'all' || item.category === currentCategory;
+                    const matchSearch = item.top.toLowerCase().includes(keyword) || item.bottom.toLowerCase().includes(keyword);
+                    return matchCat && matchSearch;
+                });
+
+                document.getElementById('phraseCount').textContent = `${filtered.length} câu`;
+                container.innerHTML = '';
+
+                if (filtered.length === 0) {
+                    container.innerHTML = `
+                        <div class="col-span-full text-center py-8 text-[#5f6368] text-sm">
+                            Không tìm thấy câu troll nào phù hợp. Bạn có thể tự nhập ở cột bên trái nhé!
+                        </div>
+                    `;
+                    return;
+                }
+
+                filtered.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'group p-3 rounded-xl border border-[#e0e0e0] hover:border-[#1a73e8] bg-[#f8f9fa] hover:bg-[#e8f0fe]/40 cursor-pointer transition flex flex-col justify-between gap-2 active:scale-[0.98]';
+                    card.onclick = () => {
+                        applyPhrase(item.top, item.bottom);
+                        showToast('Đã áp dụng câu troll vào ảnh!', '👌');
+                    };
+
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex items-center justify-between gap-1 mb-1.5">
+                                <span class="text-[11px] font-medium text-[#5f6368] bg-white px-2 py-0.5 rounded-md border border-[#e0e0e0]">${item.tag}</span>
+                                <button type="button" class="copy-phrase-btn text-[11px] text-[#1a73e8] hover:bg-[#d2e3fc] bg-[#e8f0fe] font-semibold px-2 py-0.5 rounded-md transition">📋 Copy từ</button>
+                            </div>
+                            <p class="font-semibold text-[#202124] text-sm break-all">${item.top}</p>
+                        </div>
+                        <div class="pt-1.5 border-t border-[#e0e0e0] flex items-center gap-1.5 text-xs text-[#5f6368]">
+                            <span class="text-[#1a73e8] font-bold">↳</span>
+                            <span class="font-medium text-[#202124]">${item.bottom}</span>
+                        </div>
+                    `;
+
+                    const copyBtn = card.querySelector('.copy-phrase-btn');
+                    copyBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        copyTextToClipboard(item.top, 'Đã sao chép từ');
+                    };
+
+                    container.appendChild(card);
+                });
+            } catch (err) {
+                console.error('Lỗi lọc danh sách câu troll:', err);
+            }
+        }
+
+        // Hàm hỗ trợ ngắt dòng văn bản tự động trên HTML5 Canvas
+        function wrapCanvasText(ctx, text, maxWidth) {
+            const paragraphs = text.split('\n');
+            let lines = [];
+
+            paragraphs.forEach(paragraph => {
+                if (paragraph === '') {
+                    lines.push('');
+                    return;
+                }
+                const words = paragraph.split(' ');
+                let currentLine = '';
+
+                for (let i = 0; i < words.length; i++) {
+                    const word = words[i];
+                    if (ctx.measureText(word).width > maxWidth) {
+                        if (currentLine !== '') {
+                            lines.push(currentLine);
+                            currentLine = '';
+                        }
+                        let tempWord = '';
+                        for (let char of word) {
+                            if (ctx.measureText(tempWord + char).width > maxWidth) {
+                                lines.push(tempWord);
+                                tempWord = char;
+                            } else {
+                                tempWord += char;
+                            }
+                        }
+                        currentLine = tempWord;
+                    } else {
+                        const testLine = currentLine ? currentLine + ' ' + word : word;
+                        if (ctx.measureText(testLine).width > maxWidth) {
+                            lines.push(currentLine);
+                            currentLine = word;
+                        } else {
+                            currentLine = testLine;
+                        }
+                    }
+                }
+                if (currentLine !== '') {
+                    lines.push(currentLine);
+                }
+            });
+
+            return lines.length > 0 ? lines : [''];
+        }
+
+        // Vẽ giao diện Google Dịch sắc nét lên Canvas (1080px, sạch 100% không dính nút Copy từ)
+        function renderMemeToCanvas() {
+            const canvas = document.getElementById('exportCanvas');
+            const ctx = canvas.getContext('2d');
+
+            const sourceLang = getLanguageText('source');
+            const targetLang = getLanguageText('target');
+            const topText = document.getElementById('inputTopText').value;
+            const bottomText = document.getElementById('inputBottomText').value;
+
+            const width = 1080;
+            const paddingX = 48;
+            const headerHeight = 135;
+
+            const mainFontSize = 64;
+            const lineHeight = 82;
+            ctx.font = `400 ${mainFontSize}px Roboto, Inter, sans-serif`;
+
+            const topLines = wrapCanvasText(ctx, topText, width - paddingX * 2 - 70);
+            const bottomLines = wrapCanvasText(ctx, bottomText, width - paddingX * 2);
+
+            const topBoxHeight = Math.max(320, 65 + topLines.length * lineHeight + 130);
+            const bottomBoxHeight = Math.max(300, 65 + bottomLines.length * lineHeight + 130);
+            const totalHeight = headerHeight + topBoxHeight + bottomBoxHeight;
+
+            canvas.width = width;
+            canvas.height = totalHeight;
+
+            // 1. Nền trắng toàn bộ
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, width, totalHeight);
+
+            // 2. Thanh ngôn ngữ trên cùng
+            ctx.font = '500 38px Roboto, Inter, sans-serif';
+            ctx.fillStyle = '#1a73e8';
+            ctx.textBaseline = 'middle';
+
+            const sourceX = 130;
+            const headerCenterY = headerHeight / 2;
+            ctx.fillText(sourceLang, sourceX, headerCenterY);
+            const sourceTextWidth = ctx.measureText(sourceLang).width;
+            drawDropdownTriangle(ctx, sourceX + sourceTextWidth + 24, headerCenterY - 4, '#1a73e8');
+
+            drawSwapIcon(ctx, width / 2, headerCenterY, '#5f6368');
+
+            const targetTextWidth = ctx.measureText(targetLang).width;
+            const targetX = width - 160 - targetTextWidth;
+            ctx.fillText(targetLang, targetX, headerCenterY);
+            drawDropdownTriangle(ctx, targetX + targetTextWidth + 24, headerCenterY - 4, '#1a73e8');
+
+            // Đường kẻ ngang dưới header
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(0, headerHeight);
+            ctx.lineTo(width, headerHeight);
+            ctx.stroke();
+
+            // 3. Ô văn bản nguồn (Trên)
+            ctx.font = `400 ${mainFontSize}px Roboto, Inter, sans-serif`;
+            ctx.fillStyle = '#202124';
+            ctx.textBaseline = 'top';
+
+            topLines.forEach((line, index) => {
+                ctx.fillText(line, paddingX, headerHeight + 55 + index * lineHeight);
+            });
+
+            drawCloseIcon(ctx, width - 72, headerHeight + 76, '#5f6368');
+
+            const topBottomBarY = headerHeight + topBoxHeight - 75;
+            drawSpeakerIcon(ctx, width - 190, topBottomBarY, '#5f6368');
+            drawLensIcon(ctx, width - 85, topBottomBarY, '#5f6368');
+
+            // Đường kẻ ngang ngăn cách 2 ô
+            const dividerY = headerHeight + topBoxHeight;
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(0, dividerY);
+            ctx.lineTo(width, dividerY);
+            ctx.stroke();
+
+            // 4. Ô kết quả dịch giả đánh lừa (Dưới)
+            ctx.font = `400 ${mainFontSize}px Roboto, Inter, sans-serif`;
+            ctx.fillStyle = '#202124';
+            ctx.textBaseline = 'top';
+
+            bottomLines.forEach((line, index) => {
+                ctx.fillText(line, paddingX, dividerY + 55 + index * lineHeight);
+            });
+
+            const bottomBarY = totalHeight - 75;
+            drawGoogleGLogo(ctx, paddingX + 24, bottomBarY);
+            drawSpeakerIcon(ctx, paddingX + 145, bottomBarY, '#5f6368');
+            drawCopyIcon(ctx, paddingX + 255, bottomBarY, '#5f6368');
+
+            return canvas;
+        }
+
+        // Các hàm vẽ icon vector sắc nét trên Canvas
+        function drawDropdownTriangle(ctx, x, y, color) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(x - 11, y - 5);
+            ctx.lineTo(x + 11, y - 5);
+            ctx.lineTo(x, y + 8);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function drawSwapIcon(ctx, cx, cy, color) {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(-22, -12);
+            ctx.lineTo(10, -12);
+            ctx.lineTo(10, -21);
+            ctx.lineTo(24, -9);
+            ctx.lineTo(10, 3);
+            ctx.lineTo(10, -6);
+            ctx.lineTo(-22, -6);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(22, 12);
+            ctx.lineTo(-10, 12);
+            ctx.lineTo(-10, 21);
+            ctx.lineTo(-24, 9);
+            ctx.lineTo(-10, -3);
+            ctx.lineTo(-10, 6);
+            ctx.lineTo(22, 6);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function drawCloseIcon(ctx, cx, cy, color) {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 5.5;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(-16, -16);
+            ctx.lineTo(16, 16);
+            ctx.moveTo(16, -16);
+            ctx.lineTo(-16, 16);
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        function drawSpeakerIcon(ctx, cx, cy, color) {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(-22, -9);
+            ctx.lineTo(-10, -9);
+            ctx.lineTo(4, -22);
+            ctx.lineTo(4, 22);
+            ctx.lineTo(-10, 9);
+            ctx.lineTo(-22, 9);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 4.5;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.arc(4, 0, 13, -Math.PI / 3.5, Math.PI / 3.5);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(4, 0, 22, -Math.PI / 3.2, Math.PI / 3.2);
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        function drawLensIcon(ctx, cx, cy, color) {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 4.5;
+            ctx.lineCap = 'round';
+
+            const r = 20;
+            ctx.beginPath();
+            ctx.moveTo(-r, -6);
+            ctx.lineTo(-r, -12);
+            ctx.quadraticCurveTo(-r, -r, -12, -r);
+            ctx.lineTo(-6, -r);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(6, -r);
+            ctx.lineTo(12, -r);
+            ctx.quadraticCurveTo(r, -r, r, -12);
+            ctx.lineTo(r, -6);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(-r, 6);
+            ctx.lineTo(-r, 12);
+            ctx.quadraticCurveTo(-r, r, -12, r);
+            ctx.lineTo(-6, r);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(0, 0, 7.5, 0, Math.PI * 2);
+            ctx.stroke();
+
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(14, 14, 4.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        function drawCopyIcon(ctx, cx, cy, color) {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 4.5;
+            ctx.lineJoin = 'round';
+
+            ctx.beginPath();
+            ctx.moveTo(-14, 10);
+            ctx.lineTo(-18, 10);
+            ctx.lineTo(-18, -20);
+            ctx.lineTo(8, -20);
+            ctx.lineTo(8, -14);
+            ctx.stroke();
+
+            ctx.strokeRect(-8, -12, 24, 30);
+            ctx.restore();
+        }
+
+        function drawGoogleGLogo(ctx, cx, cy) {
+            ctx.save();
+            ctx.translate(cx, cy);
+            const scale = 2.2;
+            ctx.scale(scale, scale);
+            ctx.translate(-12, -12);
+
+            const p1 = new Path2D("M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z");
+            ctx.fillStyle = "#4285F4";
+            ctx.fill(p1);
+
+            const p2 = new Path2D("M12 24c3.3 0 6.08-1.09 8.1-2.96l-3.88-3.05c-1.1.74-2.51 1.18-4.22 1.18-3.25 0-6-2.19-6.98-5.14H1.01v3.14C3.05 21.2 7.24 24 12 24z");
+            ctx.fillStyle = "#34A853";
+            ctx.fill(p2);
+
+            const p3 = new Path2D("M5.02 15.31c-.25-.74-.39-1.54-.39-2.36 0-.82.14-1.62.39-2.36V7.45H1.01C.37 8.73 0 10.16 0 11.67s.37 2.94 1.01 4.22l4.01-3.14z");
+            ctx.fillStyle = "#FBBC05";
+            ctx.fill(p3);
+
+            const p4 = new Path2D("M12 4.75c1.79 0 3.41.62 4.68 1.82l3.51-3.51C18.07 1.19 15.3 0 12 0 7.24 0 3.05 2.8 1.01 6.83l4.01 3.14c.98-2.95 3.73-5.22 6.98-5.22z");
+            ctx.fillStyle = "#EA4335";
+            ctx.fill(p4);
+
+            ctx.restore();
+        }
+
+        // Tải ảnh PNG xuống thiết bị (ưu tiên toBlob, fallback dataURL và tự gán tên file .png)
+        function downloadImage() {
+            try {
+                const canvas = renderMemeToCanvas();
+                const fileName = buildDownloadFileName();
+
+                const triggerDownloadFromHref = (href, shouldRevoke = false) => {
+                    const link = document.createElement('a');
+                    link.download = fileName;
+                    link.href = href;
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    if (shouldRevoke) {
+                        setTimeout(() => URL.revokeObjectURL(href), 2000);
+                    }
+                    showToast(`Đã tải ảnh "${fileName}" về máy!`, '📥');
+                };
+
+                if (typeof canvas.toBlob === 'function') {
+                    canvas.toBlob((blob) => {
+                        if (blob) {
+                            const blobUrl = URL.createObjectURL(blob);
+                            triggerDownloadFromHref(blobUrl, true);
+                        } else {
+                            triggerDownloadFromHref(canvas.toDataURL('image/png'), false);
+                        }
+                    }, 'image/png');
+                } else {
+                    triggerDownloadFromHref(canvas.toDataURL('image/png'), false);
+                }
+            } catch (err) {
+                console.error('Lỗi khi tải ảnh:', err);
+                showToast('Có lỗi khi tạo ảnh, vui lòng thử lại!', '❌');
+            }
+        }
+
+        // Sao chép ảnh vào Clipboard để dán thẳng vào Messenger/Zalo
+        async function copyImageToClipboard() {
+            try {
+                const canvas = renderMemeToCanvas();
+                canvas.toBlob(async (blob) => {
+                    if (!blob) {
+                        showToast('Không thể tạo dữ liệu ảnh!', '❌');
+                        return;
+                    }
+                    try {
+                        if (navigator.clipboard && window.ClipboardItem) {
+                            const item = new ClipboardItem({ 'image/png': blob });
+                            await navigator.clipboard.write([item]);
+                            showToast('Đã sao chép ảnh! Dán (Ctrl+V) vào Messenger/Zalo ngay!', '📋');
+                        } else {
+                            downloadImage();
+                            showToast('Trình duyệt không hỗ trợ copy ảnh trực tiếp, đã tự động tải ảnh về!', '📥');
+                        }
+                    } catch (clipErr) {
+                        console.error('Lỗi sao chép ảnh clipboard:', clipErr);
+                        downloadImage();
+                        showToast('Đã tải ảnh xuống để bạn gửi dễ dàng hơn!', '📥');
+                    }
+                }, 'image/png');
+            } catch (err) {
+                console.error('Lỗi chuẩn bị ảnh sao chép:', err);
+                showToast('Có lỗi xảy ra khi sao chép ảnh!', '❌');
+            }
+        }
+
+        // Khởi tạo ứng dụng khi tải trang
+        window.onload = function() {
+            updatePreview();
+            filterPhrases();
+        };
+    </script>
+</body>
+</html>
